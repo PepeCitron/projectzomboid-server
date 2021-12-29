@@ -23,7 +23,7 @@ if [ ! -d /data/config ]
 then
 	mkdir -p /data/config
 fi
-ln -s /config /root/Zomboid
+ln -s /data/config /root/Zomboid
 
 # Server Configuration
 server_ini="/data/config/Server/${SERVER_NAME}.ini"

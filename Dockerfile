@@ -30,7 +30,7 @@ EXPOSE $STEAMPORT1/udp
 EXPOSE $STEAMPORT2/udp
 EXPOSE $SERVER_PORT/udp
 
-VOLUME ["/server", "/config"]
+VOLUME ["/data/server-file", "/data/config"]
 
-COPY entry.sh /home/entry.sh
-CMD ["bash", "/home/entry.sh"]
+COPY entry.sh /data/scripts/entry.sh
+CMD ["bash", "/data/scripts/entry.sh"]

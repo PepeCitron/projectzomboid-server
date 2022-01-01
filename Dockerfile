@@ -23,12 +23,13 @@ RUN apt-get update && \
         default-jre \
     && apt-get clean autoclean \
     && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* 
 
 # Expose ports
 EXPOSE $STEAMPORT1/udp
 EXPOSE $STEAMPORT2/udp
 EXPOSE $SERVER_PORT/udp
+EXPOSE ${RCON_PASSWORD}
 
 VOLUME ["/data/server-file", "/data/config"]
 

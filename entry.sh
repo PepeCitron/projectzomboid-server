@@ -27,25 +27,22 @@ fi
 ln -s /data/config /root/Zomboid
 
 # Apply server connfiguration
-if [ ! -f /data/.lockconfig ]
+server_ini="/data/config/Server/${SERVER_NAME}.ini"
+
+if [ ! -f $server_ini ]
 then
-  # Server Configuration
-  server_ini="/data/config/Server/${SERVER_NAME}.ini"
+  echo "Updating ${SERVER_NAME}.ini..."
+  mkdir -p /data/config/Server
+  touch ${server_ini}
 
-  if [ -f $server_ini ]
-  then
-    echo "Updating ${SERVER_NAME}.ini..."
-    sed -ri "s/^DefaultPort=(.*)$/DefaultPort=${SERVER_PORT}/" "${server_ini}"
-    sed -ri "s/^Password=(.*)$/Password=${SERVER_PASSWORD}/" "${server_ini}"
-    sed -ri "s/^Public=(.*)$/Public=${SERVER_PUBLIC}/" "${server_ini}"
-    sed -ri "s/^PublicName=(.*)$/PublicName=${SERVER_PUBLIC_NAME}/" "${server_ini}"
-    sed -ri "s/^PublicDescription=(.*)$/PublicDescription=${SERVER_PUBLIC_DESC}/" "${server_ini}"
-    sed -ri "s/^RCONPort=([0-9]+)$/RCONPort=${RCON_PORT}/" "${server_ini}"
-    sed -ri "s/^RCONPassword=(.*)$/RCONPassword=${RCON_PASSWORD}/" "${server_ini}"
-    sed -ri "s/^MaxPlayers=(.*)$/MaxPlayers=${SERVER_MAX_PLAYER}/" "${server_ini}"
-  fi
-
-  touch /data/.lockconfig
+  echo "DefaultPort=${SERVER_PORT}" >> ${server_ini}
+  echo "Password=${SERVER_PASSWORD}" >> ${server_ini}
+  echo "Public=${SERVER_PUBLIC}" >> ${server_ini}
+  echo "PublicName=${SERVER_PUBLIC_NAME}" >> ${server_ini}
+  echo "PublicDescription=${SERVER_PUBLIC_DESC}" >> ${server_ini}
+  echo "RCONPort=${RCON_PORT}" >> ${server_ini}
+  echo "RCONPassword=${RCON_PASSWORD}" >> ${server_ini}
+  echo "MaxPlayers=${SERVER_MAX_PLAYER}" >> ${server_ini}
 fi
 
 # Start server

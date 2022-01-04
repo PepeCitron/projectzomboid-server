@@ -49,7 +49,7 @@ services:
     image: pepecitron/projectzomboid-server
     restart: unless-stopped
     environment:
-      ADMIN_PASSWORD: "pzadmin"
+      SERVER_ADMIN_PASSWORD: "pzadmin"
       SERVER_PASSWORD: "secretpassword"
     ports:
       - "8766:8766/udp"

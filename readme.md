@@ -29,6 +29,11 @@
 - **RCON_PORT** RCON port (default: 27015)
 - **RCON_PASSWORD** RCON password
 
+### System User
+
+- **UID** User Id (default: 1000)
+- **GID** Group ID (default: 1000)
+
 # Expose
 
 - 8766 Steam port 1 (udp)

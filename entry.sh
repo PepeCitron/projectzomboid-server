@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Ensure User and Group IDs
+if [ ! "$(id -u pzombie)" -eq "$UID" ]; then usermod -o -u "$UID" pzombie ; fi
+if [ ! "$(id -g pzombie)" -eq "$GID" ]; then groupmod -o -g "$GID" pzombie ; fi
+
 # Install SteamCMD
 if [ ! -f /home/steam/steamcmd.sh ]
 then
@@ -7,15 +11,17 @@ then
   mkdir -p /home/steam/
   cd /home/steam/
   curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
+  chown -R pzombie:pzombie /home/steam
+  chown -R pzombie:pzombie /data/server-file
 fi
 
 # Update pzserver
 echo "Updating Project Zomboid..."
 if [ "$BRANCH" == "" ]
 then
-  /home/steam/steamcmd.sh +force_install_dir /data/server-file +login anonymous +app_update 380870 +quit
+  su pzombie -s /bin/sh -p -c "/home/steam/steamcmd.sh +force_install_dir /data/server-file +login anonymous +app_update 380870 +quit"
 else
-  /home/steam/steamcmd.sh +force_install_dir /data/server-file +login anonymous +app_update 380870 -beta ${SERVERBRANCH} +quit
+  su pzombie -s /bin/sh -p -c "/home/steam/steamcmd.sh +force_install_dir /data/server-file +login anonymous +app_update 380870 -beta ${SERVERBRANCH} +quit"
 fi
 
 # Symlink
@@ -24,7 +30,7 @@ if [ ! -d /data/config ]
 then
   mkdir -p /data/config
 fi
-ln -s /data/config /root/Zomboid
+su pzombie -s /bin/sh -p -c "ln -s /data/config /home/pzombie/Zomboid"
 
 # Apply server connfiguration
 server_ini="/data/config/Server/${SERVER_NAME}.ini"
@@ -45,7 +51,9 @@ then
   echo "MaxPlayers=${SERVER_MAX_PLAYER}" >> ${server_ini}
 fi
 
+chown -R pzombie:pzombie /data/config/
+
 # Start server
 echo "Launching server..."
 cd /data/server-file
-./start-server.sh -servername ${SERVER_NAME}  -steamport1 ${STEAMPORT1} -steamport2 ${STEAMPORT2} -adminpassword ${SERVER_ADMIN_PASSWORD}
+su pzombie -s /bin/sh -p -c "./start-server.sh -servername ${SERVER_NAME}  -steamport1 ${STEAMPORT1} -steamport2 ${STEAMPORT2} -adminpassword ${SERVER_ADMIN_PASSWORD}"

@@ -13,7 +13,9 @@ ENV STEAMPORT1="8766" \
     SERVER_PUBLIC_DESC="" \
     SERVER_MAX_PLAYER="16" \
     RCON_PORT="27015" \
-    RCON_PASSWORD=""
+    RCON_PASSWORD="" \
+	UID="1000" \
+	GID="1000"
 
 # Install dependencies
 RUN apt-get update && \
@@ -23,7 +25,10 @@ RUN apt-get update && \
         default-jre \
     && apt-get clean autoclean \
     && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/* 
+    && rm -rf /var/lib/apt/lists/*
+
+# Add User
+RUN useradd -u ${UID} -U -m -s /bin/false pzombie && usermod -G users pzombie
 
 # Expose ports
 EXPOSE $STEAMPORT1/udp

@@ -34,7 +34,7 @@ RUN useradd -u ${UID} -U -m -s /bin/false pzombie && usermod -G users pzombie
 EXPOSE $STEAMPORT1/udp
 EXPOSE $STEAMPORT2/udp
 EXPOSE $SERVER_PORT/udp
-EXPOSE ${RCON_PASSWORD}
+EXPOSE ${RCON_PORT}
 
 VOLUME ["/data/server-file", "/data/config"]
 

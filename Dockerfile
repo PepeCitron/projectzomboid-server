@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 # Env var
 ENV STEAMPORT1="8766" \
@@ -20,7 +20,7 @@ ENV STEAMPORT1="8766" \
 # Install dependencies
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
-        lib32gcc1 \
+        lib32gcc-s1 \
         curl \
         default-jre \
     && apt-get clean autoclean \

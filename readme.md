@@ -29,9 +29,12 @@
 - **RCON_PORT** RCON port (default: 27015)
 - **RCON_PASSWORD** RCON password
 
+RCON is needed in order to docker gracefully stop the server,
+if a RCON Password is not provided, a random one will be used.
+
 ### System User
 
-- **UID** User Id (default: 1000)
+- **UID** User ID (default: 1000)
 - **GID** Group ID (default: 1000)
 
 # Expose
@@ -52,6 +55,7 @@ services:
   project-zomboid:
     container_name: pzserver
     image: pepecitron/projectzomboid-server
+    stop_grace_period: 15s # Time needed in order to stop the server, increase if needed
     restart: unless-stopped
     environment:
       SERVER_ADMIN_PASSWORD: "pzadmin"

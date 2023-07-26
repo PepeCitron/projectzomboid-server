@@ -50,6 +50,8 @@ then
   echo "RCONPort=${RCON_PORT}" >> ${server_ini}
   echo "RCONPassword=${RCON_PASSWORD}" >> ${server_ini}
   echo "MaxPlayers=${SERVER_MAX_PLAYER}" >> ${server_ini}
+  echo "Mods=${MOD_NAMES}" >> ${server_ini}
+  echo "WorkshopItems=${MOD_WORKSHOP_IDS}" >> ${server_ini}
 fi
 
 chown -R pzombie:pzombie /data/config/

@@ -20,6 +20,11 @@
 - **SERVER_PUBLIC_DESC** Public description of your server
 - **SERVER_MAX_PLAYER** Maximum number of players on your server (default: 16)
 
+### Mods
+
+- **MOD_NAMES** Workshop Mod Names
+- **MOD_WORKSHOP_IDS** Workshop Mod IDs
+
 ### RCON
 
 - **RCON_PORT** RCON port (default: 27015)
@@ -27,7 +32,7 @@
 
 ### System User
 
-- **UID** User Id (default: 1000)
+- **UID** User ID (default: 1000)
 - **GID** Group ID (default: 1000)
 
 # Expose
@@ -69,12 +74,13 @@ The servers configuration can be set via the servers `<SERVER_NAME>.ini` and `<S
 
 ## Mods
 
-Mods can be added by modifying the properties `WorkshopItems` and `Mods` in the generated `.ini` server file. 
-```
-# List of Workshop Mods must be separated by semicolon
-WorkshopItems=2778991696;2392709985;...
-
-Mods=Hydrocraft;tsarslib;...
+Mods can be added by modifying `MOD_NAMES` and `MOD_WORKSHOP_IDS` environment variables. 
+```yaml
+...
+    environment:
+      MOD_NAMES: "RainWash,EasyConfigChucked,ExpandedHelicopterEvents"
+      MOD_WORKSHOP_IDS: "2657661246,2529746725,2458631365"
+...
 ```
 Newly added mods and updates for existing mods are applied automatically by restarting the container.
 

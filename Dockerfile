@@ -1,12 +1,11 @@
 FROM ubuntu:22.04
 
 # Env var
-ENV STEAMPORT1="8766" \
-    STEAMPORT2="8767" \
-    SERVER_NAME="server" \
+ENV SERVER_NAME="server" \
     SERVER_PASSWORD="" \
     SERVER_ADMIN_PASSWORD="pzadmin" \
     SERVER_PORT="16261" \
+    SERVER_UDP_PORT="16262" \
     SERVER_BRANCH="" \
     SERVER_PUBLIC="false" \
     SERVER_PUBLIC_NAME="Project Zomboid Docker Server" \
@@ -31,9 +30,8 @@ RUN apt-get update && \
 RUN useradd -u ${UID} -U -m -s /bin/false pzombie && usermod -G users pzombie
 
 # Expose ports
-EXPOSE $STEAMPORT1/udp
-EXPOSE $STEAMPORT2/udp
 EXPOSE $SERVER_PORT/udp
+EXPOSE $SERVER_UDP_PORT/udp
 EXPOSE ${RCON_PORT}
 
 VOLUME ["/data/server-file", "/data/config"]

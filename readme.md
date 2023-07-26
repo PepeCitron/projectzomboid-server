@@ -7,17 +7,13 @@
 
 ## Environment varibles
 
-### Steam
-
-- **STEAMPORT1** Steam port (default: 8766)
-- **STEAMPORT2** Steam port (default: 8767)
-
 ### Project Zomboid Server
 
 - **SERVER_NAME** Name of your server (for db & ini file). Warning: don't use special characters or spaces.
 - **SERVER_PASSWORD** Password of your server used to connect to it
 - **SERVER_ADMIN_PASSWORD** Admin password on your server (default: pzadmin)
 - **SERVER_PORT** Game server port (default: 16261)
+- **SERVER_UDP_PORT** Game server UDP port (default: 16262)
 - **SERVER_BRANCH** Name of the beta branch
 - **SERVER_PUBLIC** Public server (default: false)
 - **SERVER_PUBLIC_NAME** Public name of your server
@@ -84,7 +80,7 @@ Newly added mods and updates for existing mods are applied automatically by rest
 
 ## Multiple Servers
 
-Different servers must use different ports, which can be configured individually via the `STEAMPORT1` and `STEAMPORT2` environment variables. These port-configurations must be reflected in the service's `ports` section. To avoid problems during server updates, different volumes should be mounted. The new public gameserver port (`16261`, `16262`, etc.) must be used ingame to connect to the new server.
+To avoid problems during server updates, different volumes should be mounted. The new public gameserver port (`16261`, `16262`, etc.) must be used ingame to connect to the new server.
 
 ```yaml
 version: "3.8"
@@ -97,9 +93,8 @@ services:
     environment:
       SERVER_NAME: "server-1"
     ports:
-      - "8766:8766/udp"
-      - "8767:8767/udp"
       - "16261:16261/udp"
+      - "16262:16262/udp"
     volumes:
       - ./data/server-file-server-1:/data/server-file
       - ./data/config:/data/config
@@ -109,12 +104,9 @@ services:
     restart: unless-stopped
     environment:
       SERVER_NAME: "server-2"
-      STEAMPORT1: 8768
-      STEAMPORT2: 8769
     ports:
-      - "8768:8768/udp"
-      - "8769:8769/udp"
-      - "16262:16261/udp"
+      - "16263:16261/udp"
+      - "16264:16262/udp"
     volumes:
       - ./data/server-file-server-2:/data/server-file
       - ./data/config:/data/config

@@ -42,6 +42,7 @@ then
   touch ${server_ini}
 
   echo "DefaultPort=${SERVER_PORT}" >> ${server_ini}
+  echo "UDPPort=${SERVER_UDP_PORT}" >> ${server_ini}
   echo "Password=${SERVER_PASSWORD}" >> ${server_ini}
   echo "Public=${SERVER_PUBLIC}" >> ${server_ini}
   echo "PublicName=${SERVER_PUBLIC_NAME}" >> ${server_ini}
@@ -56,4 +57,4 @@ chown -R pzombie:pzombie /data/config/
 # Start server
 echo "Launching server..."
 cd /data/server-file
-su pzombie -s /bin/sh -p -c "./start-server.sh -servername ${SERVER_NAME}  -steamport1 ${STEAMPORT1} -steamport2 ${STEAMPORT2} -adminpassword ${SERVER_ADMIN_PASSWORD}"
+su pzombie -s /bin/sh -p -c "./start-server.sh -servername ${SERVER_NAME} -adminpassword ${SERVER_ADMIN_PASSWORD}"

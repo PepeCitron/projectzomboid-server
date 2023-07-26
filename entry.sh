@@ -73,6 +73,12 @@ fi
 
 chown -R pzombie:pzombie /data/config/
 
+# Copy default spawn locations file to server config folder
+if [ ! -f /data/config/${SERVER_NAME^}/server_spawnregions.lua ]
+then
+  cp /data/server_spawnregions.lua /data/config/${SERVER_NAME^}/server_spawnregions.lua
+fi
+
 # Start server
 echo "Launching server..."
 cd /data/server-file

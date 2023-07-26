@@ -38,5 +38,8 @@ EXPOSE ${RCON_PORT}
 
 VOLUME ["/data/server-file", "/data/config"]
 
+# Add default spawn locations
+COPY server_spawnregions.lua /data/server_spawnregions.lua
+
 COPY entry.sh /data/scripts/entry.sh
 CMD ["bash", "/data/scripts/entry.sh"]

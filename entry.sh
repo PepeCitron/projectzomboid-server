@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Update config in the configuration file
+function updateConfigValue() {
+  sed -i "s/\(^$1 *= *\).*/\1$2/" $server_ini
+}
+
 # Ensure User and Group IDs
 if [ ! "$(id -u pzombie)" -eq "$UID" ]; then usermod -o -u "$UID" pzombie ; fi
 if [ ! "$(id -g pzombie)" -eq "$GID" ]; then groupmod -o -g "$GID" pzombie ; fi
@@ -52,6 +57,18 @@ then
   echo "MaxPlayers=${SERVER_MAX_PLAYER}" >> ${server_ini}
   echo "Mods=${MOD_NAMES}" >> ${server_ini}
   echo "WorkshopItems=${MOD_WORKSHOP_IDS}" >> ${server_ini}
+else
+  updateConfigValue "DefaultPort" ${SERVER_PORT}
+  updateConfigValue "UDPPort" ${SERVER_UDP_PORT}
+  updateConfigValue "Password" ${SERVER_PASSWORD}
+  updateConfigValue "Public" ${SERVER_PUBLIC}
+  updateConfigValue "PublicName" ${SERVER_PUBLIC_NAME}
+  updateConfigValue "PublicDescription" ${SERVER_PUBLIC_DESC}
+  updateConfigValue "RCONPort" ${RCON_PORT}
+  updateConfigValue "RCONPassword" ${RCON_PASSWORD}
+  updateConfigValue "MaxPlayers" ${SERVER_MAX_PLAYER}
+  updateConfigValue "Mods" ${MOD_NAMES}
+  updateConfigValue "WorkshopItems" ${MOD_WORKSHOP_IDS}
 fi
 
 chown -R pzombie:pzombie /data/config/

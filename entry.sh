@@ -62,13 +62,13 @@ else
   updateConfigValue "UDPPort" ${SERVER_UDP_PORT}
   updateConfigValue "Password" ${SERVER_PASSWORD}
   updateConfigValue "Public" ${SERVER_PUBLIC}
-  updateConfigValue "PublicName" ${SERVER_PUBLIC_NAME}
-  updateConfigValue "PublicDescription" ${SERVER_PUBLIC_DESC}
+  updateConfigValue "PublicName" "${SERVER_PUBLIC_NAME}"
+  updateConfigValue "PublicDescription" "${SERVER_PUBLIC_DESC}"
   updateConfigValue "RCONPort" ${RCON_PORT}
   updateConfigValue "RCONPassword" ${RCON_PASSWORD}
   updateConfigValue "MaxPlayers" ${SERVER_MAX_PLAYER}
-  updateConfigValue "Mods" ${MOD_NAMES}
-  updateConfigValue "WorkshopItems" ${MOD_WORKSHOP_IDS}
+  updateConfigValue "Mods" "${MOD_NAMES}"
+  updateConfigValue "WorkshopItems" "${MOD_WORKSHOP_IDS}"
 fi
 
 chown -R pzombie:pzombie /data/config/

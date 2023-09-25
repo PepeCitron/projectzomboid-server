@@ -76,8 +76,8 @@ Mods can be added by modifying `MOD_NAMES` and `MOD_WORKSHOP_IDS` environment va
 ```yaml
 ...
     environment:
-      MOD_NAMES: "RainWash,EasyConfigChucked,ExpandedHelicopterEvents"
-      MOD_WORKSHOP_IDS: "2657661246,2529746725,2458631365"
+      MOD_NAMES: "RainWash;EasyConfigChucked;ExpandedHelicopterEvents"
+      MOD_WORKSHOP_IDS: "2657661246;2529746725;2458631365"
 ...
 ```
 Newly added mods and updates for existing mods are applied automatically by restarting the container.

@@ -2,7 +2,7 @@
 
 # Update config in the configuration file
 function updateConfigValue() {
-  sed -i "s/\(^$1 *= *\).*/\1$2/" $server_ini
+  sed -i "s/\(^$1 *= *\).*/\1${2//&/\\&}/" $server_ini
 }
 
 # Ensure User and Group IDs

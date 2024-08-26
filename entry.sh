@@ -16,18 +16,20 @@ then
   mkdir -p /home/steam/
   cd /home/steam/
   curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
-  chown -R pzombie:pzombie /home/steam
-  chown -R pzombie:pzombie /data/server-file
 fi
 
 # Update pzserver
 echo "Updating Project Zomboid..."
-if [ "$SERVER_BRANCH" == "" ]
+if [ "$SERVER_BRANCH" -eq "" ]
 then
-  su pzombie -s /bin/sh -p -c "/home/steam/steamcmd.sh +force_install_dir /data/server-file +login anonymous +app_update 380870 +quit"
+  su root -s /bin/sh -p -c "/home/steam/steamcmd.sh +force_install_dir /data/server-file +login anonymous +app_update 380870 +quit"
 else
-  su pzombie -s /bin/sh -p -c "/home/steam/steamcmd.sh +force_install_dir /data/server-file +login anonymous +app_update 380870 -beta ${SERVER_BRANCH} +quit"
+  su root -s /bin/sh -p -c "/home/steam/steamcmd.sh +force_install_dir /data/server-file +login anonymous +app_update 380870 -beta ${SERVER_BRANCH} +quit"
 fi
+
+# Permissions
+chown -R pzombie:pzombie /home/steam
+chown -R pzombie:pzombie /data/server-file
 
 # Symlink
 echo "Creating symlink for config folder..."

@@ -46,8 +46,6 @@
 Example of docker compose file
 
 ```yaml
-version: "3.8"
-
 services:
   project-zomboid:
     container_name: pzserver

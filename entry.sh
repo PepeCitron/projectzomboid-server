@@ -27,6 +27,13 @@ else
   su root -s /bin/sh -p -c "/home/steam/steamcmd.sh +force_install_dir /data/server-file +login anonymous +app_update 380870 -beta ${SERVER_BRANCH} +quit"
 fi
 
+if [ -n "${FORCESTEAMCLIENTSOUPDATE}" ]; then
+  echo "FORCESTEAMCLIENTSOUPDATE variable is set, updating steamclient.so in Zomboid's server"
+  cp "/home/steam/linux64/steamclient.so" "/data/server-file/linux64/steamclient.so"
+  cp "/home/steam/linux32/steamclient.so" "/data/server-file/steamclient.so"
+fi
+
+
 # Permissions
 chown -R pzombie:pzombie /home/steam
 chown -R pzombie:pzombie /data/server-file

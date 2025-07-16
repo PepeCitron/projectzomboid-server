@@ -19,6 +19,7 @@
 - **SERVER_PUBLIC_NAME** Public name of your server
 - **SERVER_PUBLIC_DESC** Public description of your server
 - **SERVER_MAX_PLAYER** Maximum number of players on your server (default: 16)
+- **FORCESTEAMCLIENTSOUPDATE** Force an update to steamclient in the Zomboid server. May fix Workshop mod updates. Do not set if everything works fine.
 
 ### Mods
 

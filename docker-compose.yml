@@ -1,11 +1,18 @@
+version: "3.8"
+
 services:
   project-zomboid:
     container_name: pzserver
-    image: pepecitron/projectzomboid-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: projectzomboid-server:build42-local
     restart: unless-stopped
     environment:
-      SERVER_ADMIN_PASSWORD: "pzadmin"
-      SERVER_PASSWORD: "secretpassword"
+      SERVER_BRANCH: "public"
+      SERVER_ADMIN_PASSWORD: "change-me-before-starting"
+      PUID: "${PZ_UID:-1000}"
+      PGID: "${PZ_GID:-1000}"
     ports:
       - "16261:16261/udp"
       - "16262:16262/udp"
